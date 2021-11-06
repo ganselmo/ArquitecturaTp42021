@@ -7,4 +7,5 @@ import tp4.despensa.entities.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente,Integer> {
 	
+	
 }
