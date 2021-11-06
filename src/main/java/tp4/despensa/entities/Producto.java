@@ -6,7 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Proxy;
+
 @Entity
+@Proxy(lazy=false)
 public class Producto {
 
 	@Id
@@ -46,6 +49,11 @@ public class Producto {
 		this.cantidad = cantidad;
 	}
 	
+	public Producto(String nombre, int cantidad) {
+		super();
+		this.nombre = nombre;
+		this.cantidad = cantidad;
+	}
 	
 	
 	public String getNombre() {
@@ -70,6 +78,11 @@ public class Producto {
 
 	public int getCantidad() {
 		return cantidad;
+	}
+
+	@Override
+	public String toString() {
+		return "Producto [nombre=" + nombre + ", descripcion=" + descripcion + ", cantidad=" + cantidad + "]";
 	}
 
 

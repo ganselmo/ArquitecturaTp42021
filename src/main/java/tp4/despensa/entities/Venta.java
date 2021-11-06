@@ -27,12 +27,12 @@ public class Venta {
 	private int id;
 	
 	@ManyToOne
-	@Cascade(CascadeType.PERSIST)
+	@Cascade(CascadeType.MERGE)
 	private  Cliente cliente;
 	
 	@ManyToMany
 	@JsonProperty(access=Access.WRITE_ONLY)
-	@Cascade(CascadeType.PERSIST)
+	@Cascade(CascadeType.MERGE)
 	private List<Producto> productos;
 	
 	@Column(nullable = false)
@@ -75,6 +75,13 @@ public class Venta {
 
 	public Timestamp getFecha() {
 		return fecha;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Venta [cliente=" + cliente + ", productos=" + productos + ", fecha=" + fecha + "]";
 	}
 	
 	
