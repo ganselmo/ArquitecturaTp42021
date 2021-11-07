@@ -63,4 +63,9 @@ public class ProductoController {
 	public List<Producto> getAll(){
 		return this.productoService.getProductos();
 	}
+	
+	@GetMapping("/mas-vendido")
+	public Producto getProductoMasVendido(){
+		return this.productoService.getProductoMasVendido();
+	}
 }

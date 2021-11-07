@@ -7,14 +7,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+//	PARA AGREGAR EN VentaService
+//import tp4.despensa.dto.ReporteClienteVentaDTO;
+//import tp4.despensa.dto.ReporteVentasPorDiaDTO;
+
+
 import tp4.despensa.entities.Cliente;
 import tp4.despensa.repositories.ClienteRepository;
+
+//PARA AGREGAR EN VentaService
+//import tp4.despensa.repositories.VentaRepository;
 
 @Service
 public class ClienteService {
 
 	@Autowired
 	private ClienteRepository clientes;
+	
+//	PARA AGREGAR EN VentaService
+//	@Autowired
+//	private VentaRepository ventas;
+	
 	
 	public Optional<Cliente> getCliente(int id) {
 		return this.clientes.findById(id);
@@ -44,4 +58,12 @@ public class ClienteService {
 		return this.clientes.findAll();
 	}
 	
+//	PARA AGREGAR EN VentaService	
+//	public List<ReporteVentasPorDiaDTO> getVentasPorDia() {
+//		return this.ventas.getReporteVentasPorDia();
+//	}
+//	
+//	public List<ReporteClienteVentaDTO> getVentasClientes() {
+//		return this.ventas.getReporteClientesVentas();
+//	}
 }

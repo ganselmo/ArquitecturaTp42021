@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+////	PARA AGREGAR EN VentaService
+//import tp4.despensa.dto.ReporteClienteVentaDTO;
+//import tp4.despensa.dto.ReporteVentasPorDiaDTO;
+
+
 import tp4.despensa.entities.Cliente;
 import tp4.despensa.services.ClienteService;
 
@@ -63,6 +68,21 @@ public class ClienteController {
 	public List<Cliente> getAll(){
 		return this.clienteService.getClientes();
 	}
+	
+	
+//	PARA AGREGAR EN VentaController
+//	@GetMapping("/ventas-por-dia")
+//	public List<ReporteVentasPorDiaDTO> getVentasPorDia(){
+//		return this.ventaService.getVentasPorDia();
+//	}
+//	
+//	@GetMapping("/cliente-ventas")
+//	public List<ReporteClienteVentaDTO> getVentasClientes(){
+//		return this.ventaService.getVentasClientes();
+//	}
+//	
+//	
+//	
 	
 	
 }
