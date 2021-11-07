@@ -1,4 +1,4 @@
-package tp4.despensa.controller;
+package tp4.despensa.controllers;
 
 import java.util.List;
 import java.util.Optional;

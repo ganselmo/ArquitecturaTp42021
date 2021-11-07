@@ -38,7 +38,7 @@ public class Venta {
 	@Column(nullable = false)
 	Timestamp fecha;
 
-	
+	double total;
 	
 	public Venta() {
 		super();
@@ -51,12 +51,29 @@ public class Venta {
 		this.cliente = cliente;
 		this.productos = new ArrayList<Producto>(productos);
 		this.fecha =  new Timestamp(System.currentTimeMillis());
+		
+		this.total = this.calculateTotal();
 	}
 
 
 
 	public int getId() {
 		return id;
+	}
+
+	double calculateTotal()
+	{
+		double suma = 0;
+		for (Producto producto : productos) {
+			suma += producto.getPrecio();
+		}
+		
+		return suma;
+	}
+
+	
+	public double getTotal() {
+		return total;
 	}
 
 
@@ -81,10 +98,9 @@ public class Venta {
 
 	@Override
 	public String toString() {
-		return "Venta [cliente=" + cliente + ", productos=" + productos + ", fecha=" + fecha + "]";
+		return "Venta [cliente=" + cliente + ", productos=" + productos + ", fecha=" + fecha + ", total=" + total + "]";
 	}
-	
-	
+
 	
 	
 }

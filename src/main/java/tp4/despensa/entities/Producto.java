@@ -24,6 +24,10 @@ public class Producto {
 
 	@Column(nullable = false)
 	int cantidad;
+
+	@Column(nullable = false)
+	double precio;
+	
 	
 	public Producto() {
 		super();
@@ -34,25 +38,29 @@ public class Producto {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.cantidad = 0;
+		this.precio = 0;
 	}
 
-	public Producto(String nombre) {
+	public Producto(String nombre,double precio) {
 		super();
 		this.nombre = nombre;
 		this.cantidad = 0;
+		this.precio = precio;
 	}
 
-	public Producto(String nombre, String descripcion, int cantidad) {
+	public Producto(String nombre, String descripcion, int cantidad,double precio) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.cantidad = cantidad;
+		this.precio = precio;
 	}
 	
-	public Producto(String nombre, int cantidad) {
+	public Producto(String nombre, int cantidad,double precio) {
 		super();
 		this.nombre = nombre;
 		this.cantidad = cantidad;
+		this.precio = precio;
 	}
 	
 	
@@ -80,11 +88,25 @@ public class Producto {
 		return cantidad;
 	}
 
-	@Override
-	public String toString() {
-		return "Producto [nombre=" + nombre + ", descripcion=" + descripcion + ", cantidad=" + cantidad + "]";
+	
+	
+	public double getPrecio() {
+		return precio;
 	}
 
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	@Override
+	public String toString() {
+		return "Producto [nombre=" + nombre + ", descripcion=" + descripcion + ", cantidad=" + cantidad + ", precio="
+				+ precio + "]";
+	}
+	
+	
+
+	
 
 	
 	
