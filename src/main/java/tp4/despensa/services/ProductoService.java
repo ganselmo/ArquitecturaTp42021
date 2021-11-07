@@ -32,9 +32,9 @@ public class ProductoService {
 	}
 	
 	@Transactional
-	public Boolean deleteProducto(Producto p) {
-		this.productos.delete(p);
-		if(this.getProducto(p.getId()) == null) {
+	public Boolean deleteProducto(int id) {
+		this.productos.deleteById(id);
+		if(this.getProducto(id) == null) {
 			return true;
 		}else {
 			return false;

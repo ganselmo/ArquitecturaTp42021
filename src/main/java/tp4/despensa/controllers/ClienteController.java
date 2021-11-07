@@ -50,12 +50,12 @@ public class ClienteController {
 	}
 	
 	@DeleteMapping("")
-	public ResponseEntity<?> deleteCliente(@RequestBody Cliente c){
-		boolean ok = this.clienteService.deleteCliente(c);
+	public ResponseEntity<?> deleteCliente(@PathVariable("id")int id){
+		boolean ok = this.clienteService.deleteCliente(id);
 		if(!ok) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}else {
-			return new ResponseEntity<Cliente>(c, HttpStatus.OK);
+			return new ResponseEntity<>(id, HttpStatus.OK);
 		}
 	}
 	

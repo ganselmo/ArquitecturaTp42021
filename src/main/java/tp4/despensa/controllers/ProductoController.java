@@ -50,12 +50,12 @@ public class ProductoController {
 	}
 	
 	@DeleteMapping("")
-	public ResponseEntity<?> deleteProducto(@RequestBody Producto p){
-		boolean ok = this.productoService.deleteProducto(p);
+	public ResponseEntity<?> deleteProducto(@PathVariable("id")int id){
+		boolean ok = this.productoService.deleteProducto(id);
 		if(!ok) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}else {
-			return new ResponseEntity<Producto>(p, HttpStatus.OK);
+			return new ResponseEntity<>(id, HttpStatus.OK);
 		}
 	}
 	

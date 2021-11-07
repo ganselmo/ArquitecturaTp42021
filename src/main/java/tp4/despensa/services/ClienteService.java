@@ -31,9 +31,9 @@ public class ClienteService {
 	}
 	
 	@Transactional
-	public Boolean deleteCliente(Cliente c) {
-		this.clientes.delete(c);
-		if(this.getCliente(c.getId()) == null) {
+	public Boolean deleteCliente(int id) {
+		this.clientes.deleteById(id);
+		if(this.getCliente(id) == null) {
 			return true;
 		}else {
 			return false;
