@@ -34,7 +34,7 @@ public class ProductoService {
 	@Transactional
 	public Boolean deleteProducto(int id) {
 		this.productos.deleteById(id);
-		if(this.getProducto(id) == null) {
+		if(!this.getProducto(id).isPresent()) {
 			return true;
 		}else {
 			return false;

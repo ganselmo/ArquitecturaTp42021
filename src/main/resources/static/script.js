@@ -2,16 +2,27 @@ document.addEventListener("DOMContentLoaded", iniciarindex);
 
 function iniciarindex() {
 
-    document.getElementById("btn-get").addEventListener("click", getJson);
-    document.getElementById("save-producto").addEventListener("click", agregar);
-    
+    //getters
+    document.getElementById("btn-get-producto").addEventListener("click", ()=>{getJson("http://localhost:8080/producto/all")});
+    document.getElementById("btn-get-cliente").addEventListener("click", ()=>{getJson("http://localhost:8080/cliente/all")});
 
-    async function getJson(event) {
-        event.preventDefault();
+    //alta
+    document.getElementById("save-producto").addEventListener("click", agregarProducto);
+    document.getElementById("save-cliente").addEventListener("click", agregarCliente);
+
+    //baja
+    document.getElementById("borrar-producto").addEventListener("click", ()=>{borrar("http://localhost:8080/producto")});
+    document.getElementById("borrar-cliente").addEventListener("click", ()=>{borrar("http://localhost:8080/cliente")});
+
+    //modificacion
+    document.getElementById("edit-producto").addEventListener("click", editarProducto);
+    document.getElementById("edit-cliente").addEventListener("click", editarCliente);
+
+    async function getJson(url) {
         let container = document.querySelector("#js-cuerpo");
         container.innerHTML = "<h1>Loading...</h1>";
         try {
-            let response = await fetch("http://localhost:8080/producto/all", {
+            let response = await fetch(url, {
                 method: "GET",
                 mode: 'cors',
             });
@@ -28,19 +39,54 @@ function iniciarindex() {
         };
     }
 
-    function agregar() {
+    function agregarProducto() {
+        let url = "http://localhost:8080/producto";
         let data = {
-            "nombre": document.getElementById("input-nombre").value,
+            "nombre": document.getElementById("input-nombre-producto").value,
             "descripcion": document.getElementById("input-descripcion").value,
             "cantidad": parseInt(document.getElementById("input-cantidad").value),
             "precio": parseInt(document.getElementById("input-precio").value)
         }
-        console.log(data);
-        // post(data);
+        post(data, url);
     }
 
-    function post(data) {
-        fetch("http://localhost:8080/producto", {
+    function agregarCliente() {
+        let url = "http://localhost:8080/cliente";
+        let data = {
+            "nombre": document.getElementById("input-nombre-cliente").value,
+            "apellido": document.getElementById("input-apellido").value,
+            "dni": parseInt(document.getElementById("input-dni").value)
+        }
+        post(data, url);
+    }
+
+    function editarProducto() {
+        let id = parseInt(document.getElementById("edit-id-producto").value)
+        let url = "http://localhost:8080/producto"+id;
+        let data = {
+            "nombre": document.getElementById("edit-nombre-producto").value,
+            "descripcion": document.getElementById("edit-descripcion").value,
+            "cantidad": parseInt(document.getElementById("edit-cantidad").value),
+            "precio": parseInt(document.getElementById("edit-precio").value)
+        }
+        put(data, url);
+    }
+
+    function editarCliente() {
+        let id = parseInt(document.getElementById("edit-id-cliente").value)
+        let url = "http://localhost:8080/cliente/"+id;
+        let data = {
+            "nombre": document.getElementById("edit-nombre-cliente").value,
+            "apellido": document.getElementById("edit-apellido").value,
+            "dni": parseInt(document.getElementById("edit-dni").value)
+        }
+        put(data, url);
+    }
+
+    //metodos http
+    //alta
+    function post(data, url) {
+        fetch(url, {
             "method": "POST",
             "mode": "cors",
             "headers": { "Content-Type": "application/json" },
@@ -53,8 +99,48 @@ function iniciarindex() {
                 return r.json()
             })
             .then(() => {
-                get();
             })
             .catch(Exc => console.log(Exc));
     } 
+
+    //modificacion
+    function put(data, url) {
+        fetch(url, {
+            "method": "PUT",
+            "mode": "cors",
+            "headers": { "Content-Type": "application/json" },
+            "body": JSON.stringify(data)
+        })
+            .then(r => {
+                if (!r.ok) {
+                    console.log("error")
+                }
+                return r.json()
+            })
+            .then(json => {
+                console.log(json);
+            })
+            .catch(Exc => console.log(Exc));
+    }
+
+    //baja
+    function borrar(url) {
+        let id = parseInt(document.getElementById("input-id").value)
+        fetch(url + "/" + id, {
+            method: "DELETE",
+            mode: 'cors',
+        })
+            .then(r => {
+                if (!r.ok) {
+                    console.log("error")
+                }
+                return r.json()
+            })
+            .then(json => {
+                console.log(json);
+            })
+            .catch(Exc => console.log(Exc));
+    }
+
+
 }
