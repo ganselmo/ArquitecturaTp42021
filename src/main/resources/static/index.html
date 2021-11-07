@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div>
+        <div>
+            <h2>Alta Producto</h2>
+            <form action="/producto" method="POST">
+                <div>
+
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="input-nombre">
+
+                    <label for="descripcion">Descripcion</label>
+                    <input type="text" name="descripcion" id="input-descripcion">
+
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" name="cantidad" id="input-cantidad">
+
+                    <label for="precio">Precio</label>
+                    <input type="number" name="precio" id="input-precio">
+
+                </div>
+                <div>
+                    <button id="save-producto">Guardar Producto</button>
+                </div>
+            </form>
+        </div>
+        <div>
+            <h2>Baja</h2>
+            <select name="" id=""></select>
+        </div>
+        <div>
+            <h2>Modificacion</h2>
+        </div>
+    </div>
+
+    <div>
+        <h2>Getters</h2>
+        <div>
+            <button id="btn-get">Get All Products</button>
+        </div>
+    </div>
+    <div id="js-cuerpo"></div>
+</body>
+
+</html>
