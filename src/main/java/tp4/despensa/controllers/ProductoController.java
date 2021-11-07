@@ -49,7 +49,7 @@ public class ProductoController {
 		}
 	}
 	
-	@DeleteMapping("")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteProducto(@PathVariable("id")int id){
 		boolean ok = this.productoService.deleteProducto(id);
 		if(!ok) {
