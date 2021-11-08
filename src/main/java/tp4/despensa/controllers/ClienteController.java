@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ import tp4.despensa.entities.Cliente;
 import tp4.despensa.services.ClienteService;
 
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("/clientes")
 public class ClienteController {
 	private static Logger LOG = LoggerFactory.getLogger(ClienteController.class);
 	
@@ -49,7 +50,7 @@ public class ClienteController {
 		}
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("")
 	public ResponseEntity<?> deleteCliente(@PathVariable("id")int id){
 		boolean ok = this.clienteService.deleteCliente(id);
 		if(!ok) {
@@ -59,7 +60,17 @@ public class ClienteController {
 		}
 	}
 	
-	@GetMapping("/all")
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updateCliente(@RequestBody Cliente c, @PathVariable("id")int id ){
+		boolean ok = this.clienteService.updateCliente(c, id);
+		if(!ok) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}else {
+			return new ResponseEntity<Cliente>(c, HttpStatus.OK);
+		}
+	}
+	
+	@GetMapping("")
 	public List<Cliente> getAll(){
 		return this.clienteService.getClientes();
 	}

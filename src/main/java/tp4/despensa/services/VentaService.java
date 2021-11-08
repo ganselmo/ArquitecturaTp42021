@@ -78,9 +78,6 @@ public class VentaService {
 		}
 	}
 	
-
-
-	
 	
 	public Boolean updateVenta(int id,Venta v) {
 		Optional<Venta> ov = this.getVenta(id);

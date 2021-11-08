@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import tp4.despensa.entities.Producto;
 import tp4.despensa.services.ProductoService;
 
 @RestController
-@RequestMapping("/producto")
+@RequestMapping("/productos")
 public class ProductoController {
 	private static Logger LOG = LoggerFactory.getLogger(ProductoController.class);
 
@@ -59,7 +59,17 @@ public class ProductoController {
 		}
 	}
 	
-	@GetMapping("/all")
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updateProducto(@RequestBody Producto c, @PathVariable("id")int id ){
+		boolean ok = this.productoService.updateProducto(c, id);
+		if(!ok) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}else {
+			return new ResponseEntity<Producto>(c, HttpStatus.OK);
+		}
+	}
+	
+	@GetMapping("")
 	public List<Producto> getAll(){
 		return this.productoService.getProductos();
 	}
