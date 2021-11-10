@@ -65,6 +65,11 @@ public class VentaController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<?> updateVenta(@PathVariable("id") int id, @RequestBody Venta v) {
+		LOG.info("Buscando Venta {}", v);
+		if (v.getProductos().size() > 3) {
+			LOG.info("La venta no puede superar los 3 productos");
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
 		boolean ok = this.ventaService.updateVenta(id, v);
 		if (!ok) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
