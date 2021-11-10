@@ -3,6 +3,7 @@ package tp4.despensa.entities;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +16,6 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 public class Venta {
@@ -31,14 +30,13 @@ public class Venta {
 	private  Cliente cliente;
 	
 	@ManyToMany
-	@JsonProperty(access=Access.WRITE_ONLY)
 	@Cascade(CascadeType.MERGE)
 	private List<Producto> productos;
 	
 	@Column(nullable = false)
 	Timestamp fecha;
 
-	double total;
+	private double total;
 	
 	public Venta() {
 		super();
@@ -51,7 +49,6 @@ public class Venta {
 		this.cliente = cliente;
 		this.productos = new ArrayList<Producto>(productos);
 		this.fecha =  new Timestamp(System.currentTimeMillis());
-		
 		this.total = this.calculateTotal();
 	}
 
@@ -61,14 +58,14 @@ public class Venta {
 		return id;
 	}
 
-	double calculateTotal()
+	public double calculateTotal()
 	{
 		double suma = 0;
 		for (Producto producto : productos) {
 			suma += producto.getPrecio();
 		}
 		
-		return suma;
+		return  Math.floor(suma * 100) / 100;
 	}
 
 	
@@ -84,6 +81,12 @@ public class Venta {
 
 
 
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+
 	public List<Producto> getProductos() {
 		return this.productos;
 	}
@@ -94,6 +97,16 @@ public class Venta {
 		return fecha;
 	}
 
+	
+	public void addProducto(Producto p) {
+		this.productos.add(p);
+		this.total = this.calculateTotal();
+	}
+	
+	public void removeProductos() {
+		this.productos = new  ArrayList<Producto>();
+		this.total = 0;
+	}
 
 
 	@Override
@@ -101,6 +114,28 @@ public class Venta {
 		return "Venta [cliente=" + cliente + ", productos=" + productos + ", fecha=" + fecha + ", total=" + total + "]";
 	}
 
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Venta other = (Venta) obj;
+		return id == other.id;
+	}
+
+	
 	
 	
 }

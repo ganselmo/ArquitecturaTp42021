@@ -1,5 +1,7 @@
 package tp4.despensa.entities;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,16 +19,16 @@ public class Producto {
 	private int id;
 	
 	@Column(nullable = false)
-	String nombre;
+	private String nombre;
 	
 	@Column(nullable = true)
-	String descripcion;
+	private String descripcion;
 
 	@Column(nullable = false)
-	int cantidad;
+	private int cantidad;
 
 	@Column(nullable = false)
-	double precio;
+	private double precio;
 	
 	
 	public Producto() {
@@ -97,11 +99,38 @@ public class Producto {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
+	
+
+	public void addStock(int cant) {
+		this.cantidad +=cant ;
+	}
+	
+	public void removeStock(int cant) {
+		this.cantidad -=cant ;
+	}
+	
 
 	@Override
 	public String toString() {
 		return "Producto [nombre=" + nombre + ", descripcion=" + descripcion + ", cantidad=" + cantidad + ", precio="
 				+ precio + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Producto other = (Producto) obj;
+		return id == other.id;
 	}
 	
 	

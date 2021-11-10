@@ -32,7 +32,7 @@ public class DbFiller {
 			
 			IntStream.range(0, 10).forEach(i->{
 
-				Producto p = new Producto("Nombre "+i,(int)(Math.random()*50)+1,(int) ((Math.random() * 10000) + 100) / 100.0);
+				Producto p = new Producto("Nombre "+i,(int)(Math.random()*10)+1,(int) ((Math.random() * 10000) + 100) / 100.0);
 				LOG.info(p.toString());
 				pr.save(p);
 			});
