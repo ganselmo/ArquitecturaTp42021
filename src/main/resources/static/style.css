@@ -1,0 +1,18 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 200px;
+}
+
+.divs{
+    display: flex;
+}
+
+.div{
+    margin: 20px;
+}
+
+button {
+    margin: 10px;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div>
+        <div class="divs">
+            <div class="div">
+                <h2>Alta Producto</h2>
+                <div class="form">
+
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="input-nombre-producto">
+
+                    <label for="descripcion">Descripcion</label>
+                    <input type="text" name="descripcion" id="input-descripcion">
+
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" name="cantidad" id="input-cantidad">
+
+                    <label for="precio">Precio</label>
+                    <input type="number" name="precio" id="input-precio">
+
+                </div>
+                <div>
+                    <button id="save-producto">Guardar Producto</button>
+                </div>
+            </div>
+            <div class="div">
+                <h2>Alta Cliente</h2>
+                <div class="form">
+
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="input-nombre-cliente">
+
+                    <label for="apellido">Apellido</label>
+                    <input type="text" name="apellido" id="input-apellido">
+
+                    <label for="dni">DNI</label>
+                    <input type="number" name="dni" id="input-dni">
+
+                </div>
+                <div>
+                    <button id="save-cliente">Guardar Cliente</button>
+                </div>
+            </div>
+        </div>
+        <div class="divs">
+            <div class="div">
+                <h2>Modificacion Producto</h2>
+                <div class="form">
+
+                    <label for="id">Id a Editar</label>
+                    <input type="number" name="id" id="edit-id-producto">
+
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="edit-nombre-producto">
+
+                    <label for="descripcion">Descripcion</label>
+                    <input type="text" name="descripcion" id="edit-descripcion">
+
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" name="cantidad" id="edit-cantidad">
+
+                    <label for="precio">Precio</label>
+                    <input type="number" name="precio" id="edit-precio">
+
+                </div>
+                <div>
+                    <button id="edit-producto">Editar Producto</button>
+                </div>
+            </div>
+            <div class="div">
+                <h2>Modificacion Cliente</h2>
+                <div class="form">
+                    
+                    <label for="id">Id a Editar</label>
+                    <input type="number" name="id" id="edit-id-cliente">
+
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="edit-nombre-cliente">
+
+                    <label for="apellido">Apellido</label>
+                    <input type="text" name="apellido" id="edit-apellido">
+
+                    <label for="dni">DNI</label>
+                    <input type="number" name="dni" id="edit-dni">
+
+                </div>
+                <div>
+                    <button id="edit-cliente">Editar Cliente</button>
+                </div>
+            </div>
+        </div>
+        <div class="divs">
+            <div class="div">
+                <h2>Baja</h2>
+                <div class="form">
+
+                    <label for="id">Id a Borrar</label>
+                    <input type="number" name="id" id="input-id">
+
+                </div>
+                <div>
+                    <button id="borrar-producto">Borrar Producto</button>
+                    <button id="borrar-cliente">Borrar Cliente</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Getters</h2>
+            <div>
+                <button id="btn-get-producto">Get All Products</button>
+            </div>
+            <div>
+                <button id="btn-get-cliente">Get All Clients</button>
+            </div>
+        </div>
+        <div id="js-cuerpo"></div>
+</body>
+
+</html>
