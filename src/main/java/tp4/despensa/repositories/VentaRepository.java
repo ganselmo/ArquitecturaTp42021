@@ -13,7 +13,7 @@ public interface VentaRepository extends JpaRepository<Venta,Integer> {
 	
 	
 	//Genere un reporte donde se indiquen los clientes y el monto total de sus compras
-	@Query("select new tp4.despensa.dto.ReporteClienteVentaDTO(v.id, sum(v.total)) from Venta v group by v.id")
+	@Query("SELECT new tp4.despensa.dto.ReporteClienteVentaDTO(c.id, c.nombre, c.apellido, sum(v.total)) from Venta v JOIN v.cliente c WHERE v.total > 0 group by c.id")
 	public List<ReporteClienteVentaDTO> getReporteClientesVentas();
 	
 	//Genere un reporte con las ventas por día -->VER PARA MEJORAR LA CONSULTA

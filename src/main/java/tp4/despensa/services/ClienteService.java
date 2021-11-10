@@ -25,10 +25,6 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository clientes;
 
-	// PARA AGREGAR EN VentaService
-	// @Autowired
-	// private VentaRepository ventas;
-
 	private static Logger LOG = LoggerFactory.getLogger(ClienteService.class);
 
 	public Optional<Cliente> getCliente(int id) {
@@ -96,12 +92,4 @@ public class ClienteService {
 		return this.clientes.findAll();
 	}
 
-	// PARA AGREGAR EN VentaService
-	// public List<ReporteVentasPorDiaDTO> getVentasPorDia() {
-	// return this.ventas.getReporteVentasPorDia();
-	// }
-	//
-	// public List<ReporteClienteVentaDTO> getVentasClientes() {
-	// return this.ventas.getReporteClientesVentas();
-	// }
 }

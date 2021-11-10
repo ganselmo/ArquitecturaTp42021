@@ -2,42 +2,56 @@ package tp4.despensa.dto;
 
 public class ReporteClienteVentaDTO {
 	
-	private int id;
+	private int idCliente;
+	private String nombre;
+	private String apellido;
 	private double total;
 	
 	public ReporteClienteVentaDTO() {
 		super();
 	}
 
-	public ReporteClienteVentaDTO(int id, double total) {
+	public ReporteClienteVentaDTO(int idCliente, String nombre, String apellido, double total) {
 		super();
-		this.id = id;
+		this.idCliente = idCliente;
+		this.nombre = nombre;
+		this.apellido = apellido;
 		this.total = total;
 	}
-
-	public int getid() {
-		return id;
+	
+	public int getId() {
+		return idCliente;
 	}
 
-	public void setid(int id) {
-		this.id = id;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public double gettotal() {
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public double getTotal() {
 		return total;
 	}
 
-	public void settotal(double total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "ReporteClienteVentaDTO [id=" + id + ", total=" + total + "]";
+		return "ReporteClienteVentaDTO [idCliente=" + idCliente + ", nombre=" + nombre + ", apellido=" + apellido + ", total=" + total
+				+ "]";
 	}
-	
-	
-	
-	
 
 }

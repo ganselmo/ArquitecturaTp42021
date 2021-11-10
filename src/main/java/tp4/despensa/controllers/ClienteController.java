@@ -17,11 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-////	PARA AGREGAR EN VentaService
-//import tp4.despensa.dto.ReporteClienteVentaDTO;
-//import tp4.despensa.dto.ReporteVentasPorDiaDTO;
-
-
 import tp4.despensa.entities.Cliente;
 import tp4.despensa.services.ClienteService;
 
@@ -29,71 +24,54 @@ import tp4.despensa.services.ClienteService;
 @RequestMapping("/clientes")
 public class ClienteController {
 	private static Logger LOG = LoggerFactory.getLogger(ClienteController.class);
-	
+
 	@Autowired
 	private ClienteService clienteService;
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<Cliente> getCliente(@PathVariable("id")int id){
+	public ResponseEntity<Cliente> getCliente(@PathVariable("id") int id) {
 		LOG.info("Buscando cliente {}", id);
 		Optional<Cliente> cliente = this.clienteService.getCliente(id);
-		
+
 		if (cliente.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}else {
+		} else {
 			return new ResponseEntity<Cliente>(cliente.get(), HttpStatus.OK);
 		}
 	}
-	
+
 	@PostMapping("")
-	public ResponseEntity<?> addCliente(@RequestBody Cliente c){
+	public ResponseEntity<?> addCliente(@RequestBody Cliente c) {
 		boolean ok = this.clienteService.addCliente(c);
-		if(!ok) {
+		if (!ok) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		}else {
+		} else {
 			return new ResponseEntity<Cliente>(c, HttpStatus.OK);
 		}
 	}
-	
+
 	@DeleteMapping("")
-	public ResponseEntity<?> deleteCliente(@PathVariable("id")int id){
+	public ResponseEntity<?> deleteCliente(@PathVariable("id") int id) {
 		boolean ok = this.clienteService.deleteCliente(id);
-		if(!ok) {
+		if (!ok) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		}else {
+		} else {
 			return new ResponseEntity<>(id, HttpStatus.OK);
 		}
 	}
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateCliente(@RequestBody Cliente c, @PathVariable("id")int id ){
+	public ResponseEntity<?> updateCliente(@RequestBody Cliente c, @PathVariable("id") int id) {
 		boolean ok = this.clienteService.updateCliente(c, id);
-		if(!ok) {
+		if (!ok) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		}else {
+		} else {
 			return new ResponseEntity<Cliente>(c, HttpStatus.OK);
 		}
 	}
-	
+
 	@GetMapping("")
-	public List<Cliente> getAll(){
+	public List<Cliente> getAll() {
 		return this.clienteService.getClientes();
 	}
-	
-	
-//	PARA AGREGAR EN VentaController
-//	@GetMapping("/ventas-por-dia")
-//	public List<ReporteVentasPorDiaDTO> getVentasPorDia(){
-//		return this.ventaService.getVentasPorDia();
-//	}
-//	
-//	@GetMapping("/cliente-ventas")
-//	public List<ReporteClienteVentaDTO> getVentasClientes(){
-//		return this.ventaService.getVentasClientes();
-//	}
-//	
-//	
-//	
-	
-	
 }
