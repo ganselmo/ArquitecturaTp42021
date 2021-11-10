@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import tp4.despensa.dto.ReporteClienteVentaDTO;
+import tp4.despensa.dto.ReporteVentasPorDiaDTO;
 import tp4.despensa.entities.Venta;
 import tp4.despensa.services.VentaService;
+
 @RestController
 @RequestMapping("/ventas")
 public class VentaController {
@@ -27,60 +30,67 @@ public class VentaController {
 
 	@Autowired
 	private VentaService ventaService;
-	
-	
+
 	@GetMapping("")
-	public List<Venta> getAll(){
+	public List<Venta> getAll() {
 		return this.ventaService.getVentas();
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<Venta> getVenta(@PathVariable("id")int id){
+	public ResponseEntity<Venta> getVenta(@PathVariable("id") int id) {
 		LOG.info("Buscando Venta {}", id);
 		Optional<Venta> venta = this.ventaService.getVenta(id);
 		if (venta.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}else {
+		} else {
 			return new ResponseEntity<Venta>(venta.get(), HttpStatus.OK);
 		}
 	}
-	
+
 	@PostMapping("")
-	public ResponseEntity<?> addVenta(@RequestBody Venta v){
+	public ResponseEntity<?> addVenta(@RequestBody Venta v) {
 		LOG.info("Buscando Venta {}", v);
-		if(v.getProductos().size()>3)
-		{
+		if (v.getProductos().size() > 3) {
 			LOG.info("La venta no puede superar los 3 productos");
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
 		boolean ok = this.ventaService.addVenta(v);
-		
-		if(!ok) {
+
+		if (!ok) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		}else {
+		} else {
 			return new ResponseEntity<Venta>(HttpStatus.OK);
 		}
 	}
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<?>updateVenta(@PathVariable("id")int id,@RequestBody Venta v){
-		boolean ok = this.ventaService.updateVenta(id,v);
-		if(!ok) {
+	public ResponseEntity<?> updateVenta(@PathVariable("id") int id, @RequestBody Venta v) {
+		boolean ok = this.ventaService.updateVenta(id, v);
+		if (!ok) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		}else {
+		} else {
 			return new ResponseEntity<Venta>(HttpStatus.OK);
 		}
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteVenta(@PathVariable("id")int id){
+	public ResponseEntity<?> deleteVenta(@PathVariable("id") int id) {
 		boolean ok = this.ventaService.deleteVenta(id);
-		if(!ok) {
+		if (!ok) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		}else {
+		} else {
 			return new ResponseEntity<>(id, HttpStatus.OK);
 		}
 	}
-	
+
+	@GetMapping("/ventas-por-dia")
+	public List<ReporteVentasPorDiaDTO> getVentasPorDia() {
+		return this.ventaService.getVentasPorDia();
+	}
+
+	@GetMapping("/cliente-ventas")
+	public List<ReporteClienteVentaDTO> getVentasClientes() {
+		return this.ventaService.getVentasClientes();
+	}
 
 }

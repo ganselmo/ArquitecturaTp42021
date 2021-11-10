@@ -85,4 +85,10 @@ public class ProductoService {
 	public List<Producto> getProductos() {
 		return this.productos.findAll();
 	}
+	
+	public Producto getProductoMasVendido() {
+		List<Producto> productos = this.productos.getProductoMasVendido();
+		
+		return productos.get(0);
+	}
 }
