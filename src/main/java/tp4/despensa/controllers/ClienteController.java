@@ -50,7 +50,7 @@ public class ClienteController {
 		}
 	}
 
-	@DeleteMapping("")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteCliente(@PathVariable("id") int id) {
 		boolean ok = this.clienteService.deleteCliente(id);
 		if (!ok) {

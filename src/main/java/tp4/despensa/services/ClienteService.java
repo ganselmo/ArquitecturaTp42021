@@ -44,7 +44,7 @@ public class ClienteService {
 	@Transactional
 	public Boolean deleteCliente(int id) {
 		this.clientes.deleteById(id);
-		if (this.getCliente(id) == null) {
+		if (!this.getCliente(id).isPresent()) {
 			return true;
 		} else {
 			return false;
