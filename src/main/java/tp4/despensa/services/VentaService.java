@@ -8,6 +8,8 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,12 +45,24 @@ public class VentaService {
 
 	public Boolean addVenta(Venta v) {
 
+		if(!this.validarVentas(v,0))
+		{
+			return false;
+		}
+				
+		List<Producto> psd =this.getVentasDelDia(v.getCliente());
+		LOG.info("Hola");
+		for (Producto p : psd){
+			
+			LOG.info(p.toString());
+		}
 		Optional<Cliente> c = cs.getCliente(v.getCliente().getId());
 		if (!c.isPresent()) {
 			LOG.info("Cliente con id {} no existe", v.getCliente().getId());
 			return false;
 		}
 		List<Producto> productos = new ArrayList<>();
+		int contador = 1;
 		for (Producto p : v.getProductos()) {
 			Optional<Producto> op = ps.getProducto(p.getId());
 			if (!op.isPresent()) {
@@ -60,8 +74,14 @@ public class VentaService {
 				LOG.info("Producto con id {} no tiene Stock", p.getId());
 				return false;
 			}
+			if(!this.validarVentas(v,contador))
+			{
+				LOG.info("Solo puede comprar 3 productos");
+				return false;
+			}
 			productos.add(newp);
 			this.ss.removeStock(newp, 1);
+			contador++;
 
 		}
 
@@ -76,6 +96,16 @@ public class VentaService {
 		}
 	}
 
+	private boolean validarVentas(Venta v,int value) {
+		
+		if (this.getVentasDelDia(v.getCliente()).size() + value> 3) {
+			LOG.info("el cliente no puede superar los 3 productos en ventas del dia");
+			return false;
+		}
+		return true;
+		
+	}
+
 	public Boolean updateVenta(int id, Venta v) {
 		Optional<Venta> ov = this.getVenta(id);
 
@@ -86,8 +116,13 @@ public class VentaService {
 		Venta v1 = ov.get();
 
 		boolean cambioC = v1.getCliente().getId() != v.getCliente().getId();
+		LOG.info(Boolean.toString(cambioC));
+		
+		LOG.info(v.getCliente().toString());
+		LOG.info(v1.getCliente().toString());
 		boolean cambioP = !Objects.equals(v1.getProductos(), v.getProductos());
 		if (cambioC) {
+
 			LOG.info("Cambiando Cliente");
 			Optional<Cliente> cliente = this.cs.getCliente(v.getCliente().getId());
 
@@ -95,13 +130,18 @@ public class VentaService {
 				LOG.info("Cliente con id {} no existe", v.getCliente().getId());
 				return false;
 			}
+			if (this.getVentasDelDia(cliente.get()).size() > 3) {
+				LOG.info("el cliente no puede superar los 3 productos en ventas del dia");
+				return false;
+			}
 			v1.setCliente(cliente.get());
 		}
 
-		if (cambioP) {
-			LOG.info("Cambiando Productos");
+		if (cambioP&&cambioC) {
+			LOG.info("Cambiando Productos y Cliente");
 			this.returnProductos(v1);
 
+			int contador = 1;
 			for (Producto p : v.getProductos()) {
 				Optional<Producto> op = ps.getProducto(p.getId());
 				if (!op.isPresent()) {
@@ -113,9 +153,43 @@ public class VentaService {
 					LOG.info("Producto con id {} no tiene Stock", p.getId());
 					return false;
 				}
+				if(!this.validarVentas(v1,contador))
+				{
+					LOG.info("Solo puede comprar 3 productos");
+					return false;
+				}
 				v1.addProducto(newp);
 				this.ss.removeStock(newp, 1);
+				contador++;
 			}
+		}
+		else {
+			
+			LOG.info("Cambiando Solo Productos");
+			int contador = 1 - v1.getProductos().size();
+			this.returnProductos(v1);
+			
+			for (Producto p : v.getProductos()) {
+				Optional<Producto> op = ps.getProducto(p.getId());
+				if (!op.isPresent()) {
+					LOG.info("Producto con id {} no existe", p.getId());
+					return false;
+				}
+				Producto newp = op.get();
+				if (!this.ss.containsStock(newp)) {
+					LOG.info("Producto con id {} no tiene Stock", p.getId());
+					return false;
+				}
+				if(!this.validarVentas(v,contador))
+				{
+					LOG.info("Solo puede comprar 3 productos");
+					return false;
+				}
+				v1.addProducto(newp);
+				this.ss.removeStock(newp, 1);
+				contador++;
+			}
+			
 		}
 
 		if (cambioC || cambioP) {
@@ -159,5 +233,10 @@ public class VentaService {
 
 	public List<ReporteClienteVentaDTO> getVentasClientes() {
 		return this.vr.getReporteClientesVentas();
+	}
+	
+	
+	public List<Producto> getVentasDelDia(Cliente cliente){
+		return this.cs.getVentasDelDia(cliente);
 	}
 }

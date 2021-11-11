@@ -1,5 +1,7 @@
 package tp4.despensa.services;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 //import tp4.despensa.dto.ReporteVentasPorDiaDTO;
 
 import tp4.despensa.entities.Cliente;
+import tp4.despensa.entities.Producto;
 import tp4.despensa.repositories.ClienteRepository;
 
 //PARA AGREGAR EN VentaService
@@ -90,6 +93,18 @@ public class ClienteService {
 
 	public List<Cliente> getClientes() {
 		return this.clientes.findAll();
+	}
+	
+	public List<Producto> getVentasDelDia(Cliente cliente){
+		
+		Date ayer = new Date();
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(ayer); 
+		c.add(Calendar.DATE, -1);
+		ayer = c.getTime();
+		Date hoy = new Date();
+
+		return this.clientes.getVentasDelDia(cliente,hoy,ayer);
 	}
 
 }

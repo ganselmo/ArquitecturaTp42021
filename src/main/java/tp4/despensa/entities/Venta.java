@@ -1,7 +1,7 @@
 package tp4.despensa.entities;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -34,7 +36,8 @@ public class Venta {
 	private List<Producto> productos;
 	
 	@Column(nullable = false)
-	Timestamp fecha;
+	@Temporal(TemporalType.TIMESTAMP)
+	Date fecha;
 
 	private double total;
 	
@@ -48,7 +51,7 @@ public class Venta {
 		super();
 		this.cliente = cliente;
 		this.productos = new ArrayList<Producto>(productos);
-		this.fecha =  new Timestamp(System.currentTimeMillis());
+		this.fecha =  new Date();
 		this.total = this.calculateTotal();
 	}
 
@@ -93,7 +96,7 @@ public class Venta {
 
 
 
-	public Timestamp getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
