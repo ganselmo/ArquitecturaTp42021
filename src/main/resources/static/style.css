@@ -16,3 +16,9 @@
 button {
     margin: 10px;
 }
+
+footer{
+    display: flex;
+    justify-content: center;
+    background-color: grey;
+}

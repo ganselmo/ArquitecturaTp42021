@@ -52,6 +52,34 @@
                     <button id="save-cliente">Guardar Cliente</button>
                 </div>
             </div>
+            <div class="div">
+                <h2>Alta Venta</h2>
+                <div class="form">
+
+                    <label for="cliente">Cliente</label>
+                    <select name="clientes" id="select-alta-clientes">
+                    </select>
+
+                    <label for="producto1">Producto 1</label>
+                    <select name="producto1" id="select-alta-producto1">
+                        <option value="0">Ninguno</option>
+                    </select>
+
+                    <label for="producto2">Producto 2</label>
+                    <select name="producto2" id="select-alta-producto2">
+                        <option value="0">Ninguno</option>
+                    </select>
+
+                    <label for="producto3">Producto 3</label>
+                    <select name="producto3" id="select-alta-producto3">
+                        <option value="0">Ninguno</option>
+                    </select>
+
+                </div>
+                <div>
+                    <button id="save-venta">Guardar Venta</button>
+                </div>
+            </div>
         </div>
         <div class="divs">
             <div class="div">
@@ -81,7 +109,7 @@
             <div class="div">
                 <h2>Modificacion Cliente</h2>
                 <div class="form">
-                    
+
                     <label for="id">Id a Editar</label>
                     <input type="number" name="id" id="edit-id-cliente">
 
@@ -99,6 +127,37 @@
                     <button id="edit-cliente">Editar Cliente</button>
                 </div>
             </div>
+            <div class="div">
+                <h2>Modificacion Venta</h2>
+                <div class="form">
+
+                    <label for="id">Id a Editar</label>
+                    <input type="number" name="id" id="edit-id-venta">
+
+                    <label for="nombre">Cliente</label>
+                    <select name="clientes" id="select-edit-clientes">
+                    </select>
+
+                    <label for="producto1">Producto 1</label>
+                    <select name="producto1" id="select-edit-producto1">
+                        <option value="0">Ninguno</option>
+                    </select>
+
+                    <label for="producto2">Producto 2</label>
+                    <select name="producto2" id="select-edit-producto2">
+                        <option value="0">Ninguno</option>
+                    </select>
+
+                    <label for="producto3">Producto 3</label>
+                    <select name="producto3" id="select-edit-producto3">
+                        <option value="0">Ninguno</option>
+                    </select>
+
+                </div>
+                <div>
+                    <button id="edit-venta">Editar Venta</button>
+                </div>
+            </div>
         </div>
         <div class="divs">
             <div class="div">
@@ -112,19 +171,34 @@
                 <div>
                     <button id="borrar-producto">Borrar Producto</button>
                     <button id="borrar-cliente">Borrar Cliente</button>
+                    <button id="borrar-venta">Borrar Venta</button>
                 </div>
             </div>
         </div>
-        <div>
-            <h2>Getters</h2>
+        <h2>Getters</h2>
+        <div class="divs">
             <div>
                 <button id="btn-get-producto">Get All Products</button>
             </div>
             <div>
                 <button id="btn-get-cliente">Get All Clients</button>
             </div>
+            <div>
+                <button id="btn-get-ventas">Get All Ventas</button>
+            </div>
+            <div>
+                <button id="btn-get-producto-mas-vendido">Producto Mas Vendido</button>
+            </div>
+            <div>
+                <button id="btn-get-ventas-por-dia">Ventas Por Dia</button>
+            </div>
+            <div>
+                <button id="btn-get-ventas-por-cliente">Ventas Por Cliente</button>
+            </div>
         </div>
         <div id="js-cuerpo"></div>
+
+        <footer>Esto es un Footer</footer>
 </body>
 
 </html>
