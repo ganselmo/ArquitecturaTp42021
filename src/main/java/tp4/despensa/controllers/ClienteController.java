@@ -21,7 +21,7 @@ import tp4.despensa.entities.Cliente;
 import tp4.despensa.services.ClienteService;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/v1/clientes")
 public class ClienteController {
 	private static Logger LOG = LoggerFactory.getLogger(ClienteController.class);
 
