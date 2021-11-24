@@ -33,7 +33,7 @@ public class ClienteController {
 		LOG.info("Buscando cliente {}", id);
 		Optional<Cliente> cliente = this.clienteService.getCliente(id);
 
-		if (cliente.isEmpty()) {
+		if (!cliente.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			return new ResponseEntity<Cliente>(cliente.get(), HttpStatus.OK);

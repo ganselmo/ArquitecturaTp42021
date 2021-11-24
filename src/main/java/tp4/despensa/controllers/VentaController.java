@@ -40,7 +40,7 @@ public class VentaController {
 	public ResponseEntity<Venta> getVenta(@PathVariable("id") int id) {
 		LOG.info("Buscando Venta {}", id);
 		Optional<Venta> venta = this.ventaService.getVenta(id);
-		if (venta.isEmpty()) {
+		if (!venta.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			return new ResponseEntity<Venta>(venta.get(), HttpStatus.OK);

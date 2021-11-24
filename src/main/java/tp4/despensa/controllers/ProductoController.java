@@ -32,7 +32,7 @@ public class ProductoController {
 		LOG.info("Buscando producto {}", id);
 		Optional<Producto> producto = this.productoService.getProducto(id);
 		
-		if (producto.isEmpty()) {
+		if (!producto.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}else {
 			return new ResponseEntity<Producto>(producto.get(), HttpStatus.OK);
