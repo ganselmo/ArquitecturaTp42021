@@ -23,7 +23,7 @@ import tp4.despensa.entities.Venta;
 import tp4.despensa.services.VentaService;
 
 @RestController
-@RequestMapping("/v1/ventas")
+@RequestMapping("/api/v1/ventas")
 public class VentaController {
 
 	private static Logger LOG = LoggerFactory.getLogger(VentaController.class);

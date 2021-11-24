@@ -2,13 +2,17 @@ document.addEventListener("DOMContentLoaded", iniciarindex);
 
 function iniciarindex() {
 
+    //env variables
+    const apiURL = "http://tudai-arqui-tp5.herokuapp.com/api/v1";
+
+
     //getters
-    document.getElementById("btn-get-producto").addEventListener("click", () => { getJson("http://localhost:8080/productos") });
-    document.getElementById("btn-get-cliente").addEventListener("click", () => { getJson("http://localhost:8080/clientes") });
-    document.getElementById("btn-get-ventas").addEventListener("click", () => { getJson("http://localhost:8080/ventas") });
-    document.getElementById("btn-get-producto-mas-vendido").addEventListener("click", () => { getJson("http://localhost:8080/productos/mas-vendido") });
-    document.getElementById("btn-get-ventas-por-dia").addEventListener("click", () => { getJson("http://localhost:8080/ventas/ventas-por-dia") });
-    document.getElementById("btn-get-ventas-por-cliente").addEventListener("click", () => { getJson("http://localhost:8080/ventas/cliente-ventas") });
+    document.getElementById("btn-get-producto").addEventListener("click", () => { getJson(apiURL + "/productos") });
+    document.getElementById("btn-get-cliente").addEventListener("click", () => { getJson(apiURL + "/clientes") });
+    document.getElementById("btn-get-ventas").addEventListener("click", () => { getJson(apiURL + "/ventas") });
+    document.getElementById("btn-get-producto-mas-vendido").addEventListener("click", () => { getJson(apiURL + "/productos/mas-vendido") });
+    document.getElementById("btn-get-ventas-por-dia").addEventListener("click", () => { getJson(apiURL + "/ventas/ventas-por-dia") });
+    document.getElementById("btn-get-ventas-por-cliente").addEventListener("click", () => { getJson(apiURL + "/ventas/cliente-ventas") });
 
     //alta
     document.getElementById("save-producto").addEventListener("click", agregarProducto);
@@ -16,9 +20,9 @@ function iniciarindex() {
     document.getElementById("save-venta").addEventListener("click", agregarVenta);
 
     //baja
-    document.getElementById("borrar-producto").addEventListener("click", () => { borrar("http://localhost:8080/productos") });
-    document.getElementById("borrar-cliente").addEventListener("click", () => { borrar("http://localhost:8080/clientes") });
-    document.getElementById("borrar-venta").addEventListener("click", () => { borrar("http://localhost:8080/ventas") });
+    document.getElementById("borrar-producto").addEventListener("click", () => { borrar(apiURL + "/productos") });
+    document.getElementById("borrar-cliente").addEventListener("click", () => { borrar(apiURL + "/clientes") });
+    document.getElementById("borrar-venta").addEventListener("click", () => { borrar(apiURL + "/ventas") });
 
     //modificacion
     document.getElementById("edit-producto").addEventListener("click", editarProducto);
@@ -49,7 +53,7 @@ function iniciarindex() {
     }
 
     function agregarVenta() {
-        let url = "http://localhost:8080/ventas";
+        let url = apiURL + "/ventas";
         let arr = [];
         let select1 = document.getElementById("select-alta-producto1").value;
         if (select1 != 0)
@@ -71,7 +75,7 @@ function iniciarindex() {
     }
 
     function agregarProducto() {
-        let url = "http://localhost:8080/productos";
+        let url = apiURL + "/productos";
         let data = {
             "nombre": document.getElementById("input-nombre-producto").value,
             "descripcion": document.getElementById("input-descripcion").value,
@@ -82,7 +86,7 @@ function iniciarindex() {
     }
 
     function agregarCliente() {
-        let url = "http://localhost:8080/clientes";
+        let url = apiURL + "/clientes";
         let data = {
             "nombre": document.getElementById("input-nombre-cliente").value,
             "apellido": document.getElementById("input-apellido").value,
@@ -93,7 +97,7 @@ function iniciarindex() {
 
     function editarVenta() {
         let id = parseInt(document.getElementById("edit-id-venta").value)
-        let url = "http://localhost:8080/ventas/" + id;
+        let url = apiURL + "/ventas/" + id;
         let arr = [];
         let select1 = document.getElementById("select-edit-producto1").value;
         if (select1 != 0)
@@ -116,7 +120,7 @@ function iniciarindex() {
 
     function editarProducto() {
         let id = parseInt(document.getElementById("edit-id-producto").value)
-        let url = "http://localhost:8080/productos/" + id;
+        let url = apiURL + "/productos/" + id;
         let data = {
             "nombre": document.getElementById("edit-nombre-producto").value,
             "descripcion": document.getElementById("edit-descripcion").value,
@@ -128,7 +132,7 @@ function iniciarindex() {
 
     function editarCliente() {
         let id = parseInt(document.getElementById("edit-id-cliente").value)
-        let url = "http://localhost:8080/clientes/" + id;
+        let url = apiURL + "/clientes/" + id;
         let data = {
             "nombre": document.getElementById("edit-nombre-cliente").value,
             "apellido": document.getElementById("edit-apellido").value,
@@ -138,7 +142,7 @@ function iniciarindex() {
     }
 
     function getClientes() {
-        fetch("http://localhost:8080/clientes", {
+        fetch(apiURL + "/clientes", {
             method: "GET",
             mode: 'cors',
         })
@@ -167,7 +171,7 @@ function iniciarindex() {
     }
 
     function getProductos() {
-        fetch("http://localhost:8080/productos", {
+        fetch(apiURL + "/productos", {
             method: "GET",
             mode: 'cors',
         })

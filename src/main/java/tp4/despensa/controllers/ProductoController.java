@@ -20,7 +20,7 @@ import tp4.despensa.entities.Producto;
 import tp4.despensa.services.ProductoService;
 
 @RestController
-@RequestMapping("/v1/productos")
+@RequestMapping("/api/v1/productos")
 public class ProductoController {
 	private static Logger LOG = LoggerFactory.getLogger(ProductoController.class);
 
