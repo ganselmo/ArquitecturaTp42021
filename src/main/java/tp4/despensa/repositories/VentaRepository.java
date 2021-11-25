@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import tp4.despensa.dto.ReporteClienteVentaDTO;
 import tp4.despensa.dto.ReporteVentasPorDiaDTO;
 import tp4.despensa.entities.Venta;
 
+@Repository
 public interface VentaRepository extends JpaRepository<Venta,Integer> {
 	
 	
