@@ -48,6 +48,7 @@ public class Producto {
 		this.nombre = nombre;
 		this.cantidad = 0;
 		this.precio = precio;
+		this.descripcion = "";
 	}
 
 	public Producto(String nombre, String descripcion, int cantidad,double precio) {
@@ -63,6 +64,7 @@ public class Producto {
 		this.nombre = nombre;
 		this.cantidad = cantidad;
 		this.precio = precio;
+		this.descripcion = "";
 	}
 	
 	
@@ -90,6 +92,9 @@ public class Producto {
 		return cantidad;
 	}
 
+	public void setCantidad(int cantidad) {
+		this.cantidad =  cantidad;
+	}
 	
 	
 	public double getPrecio() {
