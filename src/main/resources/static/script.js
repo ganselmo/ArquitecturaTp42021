@@ -1,6 +1,6 @@
 
-// export const apiURL = "http://tudai-arqui-tp5.herokuapp.com/api/v1";
-export const apiURL = "http://localhost:8080/api/v1";
+export const apiURL = "http://tudai-arqui-tp5.herokuapp.com/api/v1";
+// export const apiURL = "http://localhost:8080/api/v1";
 
 export const capitalize =  (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
