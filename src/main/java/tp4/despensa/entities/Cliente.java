@@ -79,9 +79,11 @@ public class Cliente {
 		return id;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Cliente [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + "]";
+		return "Cliente [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + "]";
 	}
 
 	@Override
@@ -99,6 +101,10 @@ public class Cliente {
 			return false;
 		Cliente other = (Cliente) obj;
 		return id == other.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	
