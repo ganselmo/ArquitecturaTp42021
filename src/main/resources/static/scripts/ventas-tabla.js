@@ -1,10 +1,15 @@
-import { apiURL, getTabla } from "../script.js";
+import { apiURL, constructTable } from "../script.js";
 
-const resource = "/productos";
+const resource = "/ventas";
 
 let container = document.querySelector("#tabla");
-const drawTablaProducto = async ()=>
-{
+const drawTablaProducto = async () => {
+
+
+    const btnVer = document.createElement("button");
+    btnVer.setAttribute("type", "button");
+    btnVer.setAttribute("class", "btn btn-success me-4 btn-ver");
+    btnVer.innerHTML = "Ver";
 
     const btnModificar = document.createElement("button");
     btnModificar.setAttribute("type", "button");
@@ -17,29 +22,93 @@ const drawTablaProducto = async ()=>
     btnEliminar.setAttribute("class", "btn btn-danger btn-eliminar");
     btnEliminar.innerHTML = "Eliminar";
 
-    await getTabla(container,apiURL + resource,[btnModificar,btnEliminar]);
+
+    await getTabla(container, apiURL + resource,[btnVer,btnModificar,btnEliminar]);
+
+    const botonesVer = document.querySelectorAll(".btn-ver")
+    botonesVer.forEach(btn => {
+        btn.addEventListener("click", function (e) {
+            verProducto(e.target.getAttributeNode("data-id").value)
+
+        })
+    })
 
     const botonesModificar = document.querySelectorAll(".btn-modificar")
     botonesModificar.forEach(btn => {
         btn.addEventListener("click", function (e) {
             editarProducto(e.target.getAttributeNode("data-id").value)
-    
+
         })
     })
-    
+
     const botonesEliminar = document.querySelectorAll(".btn-eliminar")
     botonesEliminar.forEach(btn => {
         btn.addEventListener("click", function (e) {
-            
+
             borrarProducto(e.target.getAttributeNode("data-id").value)
-    
+
         })
     })
-    
+
+}
+
+
+const getTabla = async (container, url,botones) => {
+
+
+    container.innerHTML = "<h1>Loading...</h1>";
+    let data;
+    try {
+        let response = await fetch(url, {
+            method: "GET",
+            mode: 'cors',
+        });
+        if (response.ok) {
+            data = await response.json();
+            container.innerHTML = ""
+            const newData = performParse(data)
+
+            constructTable(container, newData,botones)
+
+
+            console.log(data);
+            return data;
+        }
+        else
+            container.innerHTML = "<h1>Error - Failed URL!</h1>";
+    }
+    catch (error) {
+        console.log(error);
+        container.innerHTML = "<h1>Connection error</h1>";
+    };
+
 }
 document.addEventListener("DOMContentLoaded", drawTablaProducto);
 
+const performParse = data => {
 
+
+    return data.map(
+        venta => {
+
+        
+
+            venta.productos = venta.productos.map(function (producto) {
+                return producto.nombre;
+            }).join(", ")
+
+            venta.fecha = parseArgentinaDate(new Date(venta.fecha))
+
+
+            venta.cliente = venta.cliente.apellido + " " + venta.cliente.nombre
+            return venta;
+        }
+    )
+}
+
+const parseArgentinaDate = (f)=>{
+    return f.getDate() + "-"+ f.getMonth()+ "-" +f.getFullYear();
+}
 const borrarProducto = id => {
 
     fetch(apiURL + resource + "/" + id, {
@@ -91,10 +160,34 @@ const editarProducto = id => {
 
         })
 }
+let toView = {};
+const verProducto = id => {
+
+    fetch(apiURL + resource + "/" + id, {
+        method: "GET",
+        mode: 'cors',
+    })
+        .then(r => {
+            if (!r.ok) {
+                console.log("error")
+            }
+            return r.json()
+        })
+        .then(json => {
+            toView = json
+            openViewModal()
+
+        })
+}
 
 const modalToggle = new bootstrap.Modal(document.getElementById('editModal'), {
     keyboard: false
 })
+
+const modalVer = new bootstrap.Modal(document.getElementById('verModal'), {
+    keyboard: false
+})
+
 
 const formNombre = document.querySelector("input[name='nombre']");
 
@@ -104,9 +197,11 @@ const formCantidad = document.querySelector("input[name='cantidad']");
 
 const formPrecio = document.querySelector("input[name='precio']");
 
+
+
 const openEditModal = () => {
     console.log(formDescripcion)
-    
+
     formNombre.value = toEdit.nombre;
     formDescripcion.value = toEdit.descripcion;
     formCantidad.value = toEdit.cantidad;
@@ -116,15 +211,27 @@ const openEditModal = () => {
 }
 
 
+const openViewModal = () => {
+    console.log(formDescripcion)
+
+    formNombre.value = toEdit.nombre;
+    formDescripcion.value = toEdit.descripcion;
+    formCantidad.value = toEdit.cantidad;
+    formPrecio.value = toEdit.precio;
+
+    modalVer.toggle()
+}
+
+
 const toastGuardado = document.getElementById('guardado')
 const toastOkGuardado = new bootstrap.Toast(toastGuardado)
 
 const updateCliente = () => {
 
-    toEdit.nombre=formNombre.value;
-    toEdit.descripcion=formDescripcion.value;
+    toEdit.nombre = formNombre.value;
+    toEdit.descripcion = formDescripcion.value;
     toEdit.cantidad = parseInt(formCantidad.value);
-    toEdit.precio= formPrecio.value ;
+    toEdit.precio = formPrecio.value;
     console.log(toEdit)
     fetch(apiURL + resource + "/" + toEdit.id, {
         "method": "PUT",

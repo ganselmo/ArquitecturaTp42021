@@ -22,7 +22,8 @@ const getHeader = async () =>
 }
 
 getHeader()
-export const getTabla = async (container,url) => {
+
+export const getTabla = async (container,url,botones = []) => {
 
     
     container.innerHTML = "<h1>Loading...</h1>";
@@ -35,7 +36,7 @@ export const getTabla = async (container,url) => {
         if (response.ok) {
             data = await response.json();
             container.innerHTML = ""
-            constructTable(container, data)
+            constructTable(container, data,botones)
 
           
             console.log(data);
@@ -53,23 +54,26 @@ export const getTabla = async (container,url) => {
 
 
 
- const constructTable = (container, data) => {
+export const constructTable = (container, data,botones= []) => {
 
-
+    if(data.length<1){
+        return
+    }
     const trhead = document.createElement('tr');
 
     const headers = Object.keys(data[0]).map(element => capitalize(element));
 
-    headers.push("Acción")
-
+    
     headers.forEach(element => {
         const th = document.createElement('th');
         th.innerHTML = element
         trhead.appendChild(th);
-        if (element === "Acción") {
-            th.setAttribute("style", "width:230px;")
-        }
+       
     })
+    const accion = document.createElement('th');
+    accion.innerHTML="Acción",
+    accion.setAttribute("class","accion");
+    trhead.appendChild(accion);
 
     const thead = document.createElement("thead")
     thead.appendChild(trhead)
@@ -87,30 +91,20 @@ export const getTabla = async (container,url) => {
         });
 
         const tdAccion = document.createElement("td")
-        tdAccion
+  
         // tdAccion.setAttribute("class","d-flex justify-content-around")
-        tdAccion.setAttribute("style", "width:230px;")
-
-        const btnModificar = document.createElement("button");
-        btnModificar.setAttribute("type", "button");
-        btnModificar.setAttribute("class", "btn btn-warning me-4 btn-modificar");
-        btnModificar.setAttribute("data-id", element.id);
-
-        btnModificar.innerHTML = "Modificar";
-
+        // tdAccion.setAttribute("style", "width:230px;")
 
 
         
-        tdAccion.appendChild(btnModificar)
-
-        const btnEliminar = document.createElement("button");
-        btnEliminar.setAttribute("type", "button");
-        btnEliminar.setAttribute("data-id", element.id);
-        btnEliminar.setAttribute("class", "btn btn-danger btn-eliminar");
-
-        btnEliminar.innerHTML = "Eliminar";
-
-        tdAccion.appendChild(btnEliminar)
+        botones.forEach(
+            (boton)=>{
+                
+                boton.setAttribute("data-id", element.id);
+                tdAccion.appendChild(boton.cloneNode(true))
+            }
+        )
+       
 
       
 

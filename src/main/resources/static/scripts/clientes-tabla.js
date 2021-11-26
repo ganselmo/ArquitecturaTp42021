@@ -6,7 +6,22 @@ let container = document.querySelector("#tabla");
 
 const drawTablaCliente = async ()=>
 {
-    await getTabla(container,apiURL + resource);
+
+
+    const btnModificar = document.createElement("button");
+    btnModificar.setAttribute("type", "button");
+    btnModificar.setAttribute("class", "btn btn-warning me-4 btn-modificar");
+    btnModificar.innerHTML = "Modificar";
+
+
+    const btnEliminar = document.createElement("button");
+    btnEliminar.setAttribute("type", "button");
+    btnEliminar.setAttribute("class", "btn btn-danger btn-eliminar");
+    btnEliminar.innerHTML = "Eliminar";
+
+    
+
+    await getTabla(container,apiURL + resource,[btnModificar,btnEliminar]);
 
     const botonesModificar = document.querySelectorAll(".btn-modificar")
     botonesModificar.forEach(btn => {
