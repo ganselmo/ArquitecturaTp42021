@@ -1,24 +1,7 @@
-.form{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    max-width: 200px;
+.toast {
+    border: 0;
 }
 
-.divs{
-    display: flex;
-}
-
-.div{
-    margin: 20px;
-}
-
-button {
-    margin: 10px;
-}
-
-footer{
-    display: flex;
-    justify-content: center;
-    background-color: grey;
+div.table-responsive {
+    max-height: 90vh;
 }

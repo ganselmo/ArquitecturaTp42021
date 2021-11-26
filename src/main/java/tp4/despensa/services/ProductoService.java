@@ -59,12 +59,17 @@ public class ProductoService {
 		
 
 		Boolean cambioNom = !p1.getNombre().equals(p.getNombre());
+		Boolean cambioCant = p1.getCantidad() != (p.getCantidad());
 		Boolean cambioDesc = !p1.getDescripcion().equals(p.getDescripcion());
 		Boolean cambioPrec = p1.getPrecio() != p.getPrecio();
 		
 		if(cambioNom) {
 			LOG.info("Cambiando nombre");
 			p1.setNombre(p.getNombre());
+		}
+		if(cambioCant) {
+			LOG.info("Cambiando nombre");
+			p1.setCantidad(p.getCantidad());
 		}
 		if(cambioDesc) {
 			LOG.info("Cambiando descripcion");

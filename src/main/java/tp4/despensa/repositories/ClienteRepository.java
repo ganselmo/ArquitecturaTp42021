@@ -6,11 +6,12 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import tp4.despensa.entities.Cliente;
 import tp4.despensa.entities.Producto;
 
-
+@Repository
 public interface ClienteRepository extends JpaRepository<Cliente,Integer> {
 	
 	@Query("select p FROM Venta v JOIN v.productos p WHERE v.cliente =:cliente and v.fecha <:hoy and v.fecha >:ayer")

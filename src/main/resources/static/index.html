@@ -8,202 +8,22 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 </head>
 
 <body>
-    <div>
-        <div class="divs">
-            <div class="div">
-                <h2>Alta Producto</h2>
-                <div class="form">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4" id="header"></nav>    
+        
+    </nav>
+    <h1>Bienvenidos al sistema</h1>
 
-                    <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" id="input-nombre-producto">
 
-                    <label for="descripcion">Descripcion</label>
-                    <input type="text" name="descripcion" id="input-descripcion">
-
-                    <label for="cantidad">Cantidad</label>
-                    <input type="number" name="cantidad" id="input-cantidad">
-
-                    <label for="precio">Precio</label>
-                    <input type="number" name="precio" id="input-precio">
-
-                </div>
-                <div>
-                    <button id="save-producto">Guardar Producto</button>
-                </div>
-            </div>
-            <div class="div">
-                <h2>Alta Cliente</h2>
-                <div class="form">
-
-                    <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" id="input-nombre-cliente">
-
-                    <label for="apellido">Apellido</label>
-                    <input type="text" name="apellido" id="input-apellido">
-
-                    <label for="dni">DNI</label>
-                    <input type="number" name="dni" id="input-dni">
-
-                </div>
-                <div>
-                    <button id="save-cliente">Guardar Cliente</button>
-                </div>
-            </div>
-            <div class="div">
-                <h2>Alta Venta</h2>
-                <div class="form">
-
-                    <label for="cliente">Cliente</label>
-                    <select name="clientes" id="select-alta-clientes">
-                    </select>
-
-                    <label for="producto1">Producto 1</label>
-                    <select name="producto1" id="select-alta-producto1">
-                        <option value="0">Ninguno</option>
-                    </select>
-
-                    <label for="producto2">Producto 2</label>
-                    <select name="producto2" id="select-alta-producto2">
-                        <option value="0">Ninguno</option>
-                    </select>
-
-                    <label for="producto3">Producto 3</label>
-                    <select name="producto3" id="select-alta-producto3">
-                        <option value="0">Ninguno</option>
-                    </select>
-
-                </div>
-                <div>
-                    <button id="save-venta">Guardar Venta</button>
-                </div>
-            </div>
-        </div>
-        <div class="divs">
-            <div class="div">
-                <h2>Modificacion Producto</h2>
-                <div class="form">
-
-                    <label for="id">Id a Editar</label>
-                    <input type="number" name="id" id="edit-id-producto">
-
-                    <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" id="edit-nombre-producto">
-
-                    <label for="descripcion">Descripcion</label>
-                    <input type="text" name="descripcion" id="edit-descripcion">
-
-                    <label for="cantidad">Cantidad</label>
-                    <input type="number" name="cantidad" id="edit-cantidad">
-
-                    <label for="precio">Precio</label>
-                    <input type="number" name="precio" id="edit-precio">
-
-                </div>
-                <div>
-                    <button id="edit-producto">Editar Producto</button>
-                </div>
-            </div>
-            <div class="div">
-                <h2>Modificacion Cliente</h2>
-                <div class="form">
-
-                    <label for="id">Id a Editar</label>
-                    <input type="number" name="id" id="edit-id-cliente">
-
-                    <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" id="edit-nombre-cliente">
-
-                    <label for="apellido">Apellido</label>
-                    <input type="text" name="apellido" id="edit-apellido">
-
-                    <label for="dni">DNI</label>
-                    <input type="number" name="dni" id="edit-dni">
-
-                </div>
-                <div>
-                    <button id="edit-cliente">Editar Cliente</button>
-                </div>
-            </div>
-            <div class="div">
-                <h2>Modificacion Venta</h2>
-                <div class="form">
-
-                    <label for="id">Id a Editar</label>
-                    <input type="number" name="id" id="edit-id-venta">
-
-                    <label for="nombre">Cliente</label>
-                    <select name="clientes" id="select-edit-clientes">
-                    </select>
-
-                    <label for="producto1">Producto 1</label>
-                    <select name="producto1" id="select-edit-producto1">
-                        <option value="0">Ninguno</option>
-                    </select>
-
-                    <label for="producto2">Producto 2</label>
-                    <select name="producto2" id="select-edit-producto2">
-                        <option value="0">Ninguno</option>
-                    </select>
-
-                    <label for="producto3">Producto 3</label>
-                    <select name="producto3" id="select-edit-producto3">
-                        <option value="0">Ninguno</option>
-                    </select>
-
-                </div>
-                <div>
-                    <button id="edit-venta">Editar Venta</button>
-                </div>
-            </div>
-        </div>
-        <div class="divs">
-            <div class="div">
-                <h2>Baja</h2>
-                <div class="form">
-
-                    <label for="id">Id a Borrar</label>
-                    <input type="number" name="id" id="input-id">
-
-                </div>
-                <div>
-                    <button id="borrar-producto">Borrar Producto</button>
-                    <button id="borrar-cliente">Borrar Cliente</button>
-                    <button id="borrar-venta">Borrar Venta</button>
-                </div>
-            </div>
-        </div>
-        <h2>Getters</h2>
-        <div class="divs">
-            <div>
-                <button id="btn-get-producto">Get All Products</button>
-            </div>
-            <div>
-                <button id="btn-get-cliente">Get All Clients</button>
-            </div>
-            <div>
-                <button id="btn-get-ventas">Get All Ventas</button>
-            </div>
-            <div>
-                <button id="btn-get-producto-mas-vendido">Producto Mas Vendido</button>
-            </div>
-            <div>
-                <button id="btn-get-ventas-por-dia">Ventas Por Dia</button>
-            </div>
-            <div>
-                <button id="btn-get-ventas-por-cliente">Ventas Por Cliente</button>
-            </div>
-        </div>
-        <div id="js-cuerpo"></div>
-
-        <footer>Esto es un Footer</footer>
-
-        <script src="script.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script type="module" src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 
 </body>
 
