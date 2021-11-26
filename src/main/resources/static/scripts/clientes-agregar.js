@@ -28,7 +28,7 @@ const addCliente = () => {
         })
             .then(r => {
                 if (!r.ok) {
-                    console.log("error")
+                    console.error("error")
                 }
                 return r.json()
             })
@@ -39,7 +39,7 @@ const addCliente = () => {
                 formApellido.value = "";
                 formDni.value="";
             })
-            .catch(Exc => console.log(Exc));
+            .catch(Exc => console.error(Exc));
     }
     
 }

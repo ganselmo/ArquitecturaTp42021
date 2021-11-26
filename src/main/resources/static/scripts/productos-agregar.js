@@ -35,7 +35,7 @@ const addCliente = () => {
         })
             .then(r => {
                 if (!r.ok) {
-                    console.log("error")
+                    console.error("error")
                 }
                 return r.json()
             })
@@ -48,7 +48,7 @@ const addCliente = () => {
                 formCantidad.value="";
                 formPrecio.value='';
             })
-            .catch(Exc => console.log(Exc));
+            .catch(Exc => console.error(Exc));
     }
     
 }

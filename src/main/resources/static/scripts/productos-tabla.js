@@ -81,7 +81,7 @@ const editarProducto = id => {
     })
         .then(r => {
             if (!r.ok) {
-                console.log("error")
+                console.error("error")
             }
             return r.json()
         })
@@ -105,7 +105,6 @@ const formCantidad = document.querySelector("input[name='cantidad']");
 const formPrecio = document.querySelector("input[name='precio']");
 
 const openEditModal = () => {
-    console.log(formDescripcion)
     
     formNombre.value = toEdit.nombre;
     formDescripcion.value = toEdit.descripcion;
@@ -125,7 +124,6 @@ const updateCliente = () => {
     toEdit.descripcion=formDescripcion.value;
     toEdit.cantidad = parseInt(formCantidad.value);
     toEdit.precio= formPrecio.value ;
-    console.log(toEdit)
     fetch(apiURL + resource + "/" + toEdit.id, {
         "method": "PUT",
         "mode": "cors",
@@ -134,7 +132,7 @@ const updateCliente = () => {
     })
         .then(r => {
             if (!r.ok) {
-                console.log("error")
+                console.error("error")
             }
             return r.json()
         })
@@ -143,7 +141,7 @@ const updateCliente = () => {
 
             drawTablaProducto()
         })
-        .catch(Exc => console.log(Exc));
+        .catch(Exc => console.error(Exc));
 }
 
 const guardarbtn = document.querySelector("#guardar")

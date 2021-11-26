@@ -26,7 +26,6 @@ const drawTablaCliente = async ()=>
     const botonesModificar = document.querySelectorAll(".btn-modificar")
     botonesModificar.forEach(btn => {
         btn.addEventListener("click", function (e) {
-            console.log("gero")
             editarCliente(e.target.getAttributeNode("data-id").value)
     
         })
@@ -44,11 +43,6 @@ const drawTablaCliente = async ()=>
 }
 
 
-// btnEliminar.addEventListener("click", function (e) {
-//     console.log(e)
-//     // borrarCliente(element.id)
-
-// })
 
 const borrarCliente = id => {
 
@@ -96,7 +90,7 @@ const editarCliente = id => {
     })
         .then(r => {
             if (!r.ok) {
-                console.log("error")
+                console.error("error")
             }
             return r.json()
         })
@@ -118,7 +112,6 @@ const formApellido = document.querySelector("input[name='apellido']");
 const formDni = document.querySelector("input[name='dni']");
 
 const openEditModal = () => {
-    console.log(toEdit)
     formNombre.value = toEdit.nombre;
     formApellido.value = toEdit.apellido;
     formDni.value = toEdit.dni;
@@ -144,7 +137,7 @@ const updateCliente = () => {
     })
         .then(r => {
             if (!r.ok) {
-                console.log("error")
+                console.error("error")
             }
             return r.json()
         })
@@ -153,7 +146,7 @@ const updateCliente = () => {
 
             drawTablaCliente()
         })
-        .catch(Exc => console.log(Exc));
+        .catch(Exc => console.error(Exc));
 }
 const guardarbtn = document.querySelector("#guardar")
 guardarbtn.addEventListener("click", updateCliente);
