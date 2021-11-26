@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import tp4.despensa.entities.Producto;
 import tp4.despensa.services.ProductoService;
 
+//Controlador de producto que se ocupa de capturar los request 
+//que entran en la aplicación y derivan la consulta al servicio correspondiente.
 @RestController
 @RequestMapping("/api/v1/productos")
 public class ProductoController {
@@ -27,6 +29,7 @@ public class ProductoController {
 	@Autowired
 	private ProductoService productoService;
 	
+	//obtiene un producto por medio de su id
 	@GetMapping("/{id}")
 	public ResponseEntity<Producto> getProducto(@PathVariable("id")int id){
 		LOG.info("Buscando producto {}", id);
@@ -39,6 +42,7 @@ public class ProductoController {
 		}
 	}
 	
+	//agrega un producto a la base de datos
 	@PostMapping("")
 	public ResponseEntity<?> addProducto(@RequestBody Producto p){
 		boolean ok = this.productoService.addProducto(p);
@@ -49,6 +53,7 @@ public class ProductoController {
 		}
 	}
 	
+	//elimina determinado producto por medio de su id
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteProducto(@PathVariable("id")int id){
 		boolean ok = this.productoService.deleteProducto(id);
@@ -59,6 +64,7 @@ public class ProductoController {
 		}
 	}
 	
+	//actualiza un producto por medio de su id
 	@PutMapping("/{id}")
 	public ResponseEntity<?> updateProducto(@RequestBody Producto c, @PathVariable("id")int id ){
 		boolean ok = this.productoService.updateProducto(c, id);
@@ -69,11 +75,13 @@ public class ProductoController {
 		}
 	}
 	
+	//obtiene el listado de productos
 	@GetMapping("")
 	public List<Producto> getAll(){
 		return this.productoService.getProductos();
 	}
 	
+	//obtiene un reporte del producto mas vendido
 	@GetMapping("/mas-vendido")
 	public Producto getProductoMasVendido(){
 		return this.productoService.getProductoMasVendido();

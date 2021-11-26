@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import tp4.despensa.entities.Producto;
 import tp4.despensa.repositories.ProductoRepository;
 
-
+//Servicio de producto
+//intermediario entre el controlador y el repositorio,
+//lleva a cabo la lógica de negocio y procesamiento de los datos.
 @Service
 public class ProductoService {
 
@@ -20,11 +22,12 @@ public class ProductoService {
 	
 	private static Logger LOG = LoggerFactory.getLogger(ProductoService.class);
 
-	
+	//obtiene un producto en especifico por medio del id
 	public Optional<Producto> getProducto(int id) {
 		return this.productos.findById(id);
 	}
 	
+	//agrega un producto a la base de datos
 	@Transactional
 	public Boolean addProducto(Producto p) {
 		this.productos.save(p);
@@ -35,6 +38,7 @@ public class ProductoService {
 		}
 	}
 	
+	//elimina un producto en particular de la base de datos
 	@Transactional
 	public Boolean deleteProducto(int id) {
 		this.productos.deleteById(id);
@@ -45,6 +49,7 @@ public class ProductoService {
 		}
 	}
 	
+	//actualiza un producto por medio de su id
 	@Transactional
 	public Boolean updateProducto(Producto p, int id) {
 
@@ -87,10 +92,12 @@ public class ProductoService {
 		return true;
 	}
 
+	//obtiene el listado de productos
 	public List<Producto> getProductos() {
 		return this.productos.findAll();
 	}
 	
+	//obtiene el producto mas vendido
 	public Producto getProductoMasVendido() {
 		List<Producto> productos = this.productos.getProductoMasVendido();
 		

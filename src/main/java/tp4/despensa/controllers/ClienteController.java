@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import tp4.despensa.entities.Cliente;
 import tp4.despensa.services.ClienteService;
 
+//Controlador de cliente que se ocupa de capturar los request 
+//que entran en la aplicación y derivan la consulta al servicio correspondiente.
 @RestController
 @RequestMapping("/api/v1/clientes")
 public class ClienteController {
@@ -28,6 +30,7 @@ public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
 
+	//devuelte un cliente con un id en particular
 	@GetMapping("/{id}")
 	public ResponseEntity<Cliente> getCliente(@PathVariable("id") int id) {
 		LOG.info("Buscando cliente {}", id);
@@ -40,6 +43,7 @@ public class ClienteController {
 		}
 	}
 
+	//agrega un cliente en la base de datos
 	@PostMapping("")
 	public ResponseEntity<?> addCliente(@RequestBody Cliente c) {
 		boolean ok = this.clienteService.addCliente(c);
@@ -50,6 +54,7 @@ public class ClienteController {
 		}
 	}
 
+	//elimina un cliente determinado por medio de un id
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteCliente(@PathVariable("id") int id) {
 		boolean ok = this.clienteService.deleteCliente(id);
@@ -60,6 +65,7 @@ public class ClienteController {
 		}
 	}
 
+	//actualiza algun atributo de un cliente ya registrado en la base
 	@PutMapping("/{id}")
 	public ResponseEntity<?> updateCliente(@RequestBody Cliente c, @PathVariable("id") int id) {
 		boolean ok = this.clienteService.updateCliente(c, id);
@@ -70,6 +76,7 @@ public class ClienteController {
 		}
 	}
 
+	//obtiene el listado de clientes
 	@GetMapping("")
 	public List<Cliente> getAll() {
 		return this.clienteService.getClientes();

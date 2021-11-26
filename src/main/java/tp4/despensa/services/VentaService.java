@@ -21,6 +21,9 @@ import tp4.despensa.entities.Venta;
 
 import tp4.despensa.repositories.VentaRepository;
 
+//Servicio de ventas
+//intermediario entre el controlador y el repositorio,
+//lleva a cabo la lógica de negocio y procesamiento de los datos.
 @Service
 public class VentaService {
 
@@ -35,14 +38,17 @@ public class VentaService {
 	@Autowired
 	private StockService ss;
 
+	//obtiene una venta por medio de un id
 	public Optional<Venta> getVenta(int id) {
 		return this.vr.findById(id);
 	}
 
+	//obtiene el listado de ventas
 	public List<Venta> getVentas() {
 		return this.vr.findAll();
 	}
 
+	//agrega una venta a la base de datos
 	public Boolean addVenta(Venta v) {
 
 		if(!this.validarVentas(v,0))
@@ -96,6 +102,7 @@ public class VentaService {
 		}
 	}
 
+	//valida que no se haya excedido el limite de compras por cliente de 3 unidades por dia
 	private boolean validarVentas(Venta v,int value) {
 		
 		if (this.getVentasDelDia(v.getCliente()).size() + value> 3) {
@@ -106,6 +113,7 @@ public class VentaService {
 		
 	}
 
+	//actualiza una venta
 	public Boolean updateVenta(int id, Venta v) {
 		Optional<Venta> ov = this.getVenta(id);
 
@@ -199,6 +207,7 @@ public class VentaService {
 		return true;
 	}
 
+	//elimina una venta
 	@Transactional
 	public Boolean deleteVenta(int id) {
 
@@ -218,6 +227,7 @@ public class VentaService {
 
 	}
 
+	//devuelte los productos de una venta en especifico
 	private void returnProductos(Venta v1) {
 
 		for (Producto p : v1.getProductos()) {
@@ -227,15 +237,17 @@ public class VentaService {
 
 	}
 
+	//reporte con el listado de ventas por dia
 	public List<ReporteVentasPorDiaDTO> getVentasPorDia() {
 		return this.vr.getReporteVentasPorDia();
 	}
 
+	//reporte con el listado de ventas por cliente
 	public List<ReporteClienteVentaDTO> getVentasClientes() {
 		return this.vr.getReporteClientesVentas();
 	}
 	
-	
+	//reporte con las ventas del dia
 	public List<Producto> getVentasDelDia(Cliente cliente){
 		return this.cs.getVentasDelDia(cliente);
 	}

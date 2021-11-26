@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import tp4.despensa.entities.Producto;
 
+//repositorio de producto destinado a interactuar con la tabla productos en la base de datos
+
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto,Integer> {
 	

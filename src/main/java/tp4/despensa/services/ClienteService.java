@@ -22,6 +22,9 @@ import tp4.despensa.repositories.ClienteRepository;
 //PARA AGREGAR EN VentaService
 //import tp4.despensa.repositories.VentaRepository;
 
+//Servicio de cliente
+//intermediario entre el controlador y el repositorio,
+//lleva a cabo la lógica de negocio y procesamiento de los datos.
 @Service
 public class ClienteService {
 
@@ -34,6 +37,7 @@ public class ClienteService {
 		return this.clientes.findById(id);
 	}
 
+	//agrega un cliente en la base de datos
 	@Transactional
 	public Boolean addCliente(Cliente c) {
 		this.clientes.save(c);
@@ -44,6 +48,7 @@ public class ClienteService {
 		}
 	}
 
+	//elimina un cliente de la base de datos
 	@Transactional
 	public Boolean deleteCliente(int id) {
 		this.clientes.deleteById(id);
@@ -54,6 +59,7 @@ public class ClienteService {
 		}
 	}
 
+	//actualiza un cliente de la base de datos
 	@Transactional
 	public Boolean updateCliente(Cliente c, int id) {
 
@@ -91,10 +97,12 @@ public class ClienteService {
 
 	}
 
+	//obtiene el listado de clientes de la base de datos
 	public List<Cliente> getClientes() {
 		return this.clientes.findAll();
 	}
 	
+	//obtiene el listado de ventas por dia
 	public List<Producto> getVentasDelDia(Cliente cliente){
 		
 		Date ayer = new Date();
