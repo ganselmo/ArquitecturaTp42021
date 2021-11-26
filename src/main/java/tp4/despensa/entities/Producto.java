@@ -10,6 +10,7 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.Proxy;
 
+//Entidad Producto
 @Entity
 @Proxy(lazy=false)
 public class Producto {
@@ -34,6 +35,8 @@ public class Producto {
 	public Producto() {
 		super();
 	}
+	
+	//multiples constructores
 
 	public Producto(String nombre, String descripcion) {
 		super();

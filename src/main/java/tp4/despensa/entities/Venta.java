@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-
+//Entidad Venta
 @Entity
 public class Venta {
 
@@ -63,6 +63,8 @@ public class Venta {
 		return id;
 	}
 
+	//Calculo del total de ventas 
+	//por producto en funcion de su precio
 	public double calculateTotal()
 	{
 		double suma = 0;

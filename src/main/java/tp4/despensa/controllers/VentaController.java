@@ -22,6 +22,8 @@ import tp4.despensa.dto.ReporteVentasPorDiaDTO;
 import tp4.despensa.entities.Venta;
 import tp4.despensa.services.VentaService;
 
+//Controlador de venta que se ocupa de capturar los request 
+//que entran en la aplicación y derivan la consulta al servicio correspondiente.
 @RestController
 @RequestMapping("/api/v1/ventas")
 public class VentaController {
@@ -31,11 +33,13 @@ public class VentaController {
 	@Autowired
 	private VentaService ventaService;
 
+	//obtiene el listado de ventas
 	@GetMapping("")
 	public List<Venta> getAll() {
 		return this.ventaService.getVentas();
 	}
 
+	//obtiene una venta en particular por medio de un id
 	@GetMapping("/{id}")
 	public ResponseEntity<Venta> getVenta(@PathVariable("id") int id) {
 		LOG.info("Buscando Venta {}", id);
@@ -47,6 +51,7 @@ public class VentaController {
 		}
 	}
 
+	//agrega una venta en la base de datos
 	@PostMapping("")
 	public ResponseEntity<?> addVenta(@RequestBody Venta v) {
 		LOG.info("Guardando Venta {}", v);
@@ -60,6 +65,7 @@ public class VentaController {
 		}
 	}
 
+	//actualiza una venta por medio de su id
 	@PutMapping("/{id}")
 	public ResponseEntity<?> updateVenta(@PathVariable("id") int id, @RequestBody Venta v) {
 		LOG.info("Updateando Venta {}", v);
@@ -82,11 +88,13 @@ public class VentaController {
 		}
 	}
 
+	//obtiene un reporte con las ventas por dia
 	@GetMapping("/ventas-por-dia")
 	public List<ReporteVentasPorDiaDTO> getVentasPorDia() {
 		return this.ventaService.getVentasPorDia();
 	}
 
+	//obtiene un reporte de las ventas por cliente
 	@GetMapping("/cliente-ventas")
 	public List<ReporteClienteVentaDTO> getVentasClientes() {
 		return this.ventaService.getVentasClientes();

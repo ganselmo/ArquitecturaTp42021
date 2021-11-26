@@ -1,5 +1,8 @@
 package tp4.despensa.dto;
 
+//Reporte como un objeto de transferencia
+//con solo los datos requeridos por el cliente
+
 public class ReporteVentasPorDiaDTO {
 	
 	private int dia;

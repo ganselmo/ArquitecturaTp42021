@@ -10,6 +10,8 @@ import tp4.despensa.dto.ReporteClienteVentaDTO;
 import tp4.despensa.dto.ReporteVentasPorDiaDTO;
 import tp4.despensa.entities.Venta;
 
+//repositorio de ventas destinado a interactuar con la tabla ventas en la base de datos
+
 @Repository
 public interface VentaRepository extends JpaRepository<Venta,Integer> {
 	

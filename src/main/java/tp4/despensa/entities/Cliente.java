@@ -10,6 +10,7 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.Proxy;
 
+//Entidad cliente
 @Entity
 @Proxy(lazy=false)
 public class Cliente {
@@ -17,7 +18,7 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	private int id;
-	@Column(nullable = false)
+	@Column(nullable = false) 
 	private String nombre;
 	@Column(nullable = false)
 	private String apellido;
