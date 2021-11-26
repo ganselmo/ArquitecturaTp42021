@@ -105,7 +105,7 @@ public class ClienteControllerIntegrationTest {
 	
 	// El test pasa si se agrega correctamente un Cliente y se encuentra el mismo por su Id
 	@Test
-	public void getClientePorsId() {
+	public void getClientePorId() {
 		controller.addCliente(defaultCliente);
 		ResponseEntity<?> re = controller.getCliente(defaultCliente.getId());
 		assertEquals(re.getStatusCode(), HttpStatus.OK);
