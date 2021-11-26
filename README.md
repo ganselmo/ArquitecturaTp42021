@@ -49,3 +49,4 @@ Por último, se implementaron los controladores con la anotación <span style='f
 ![Diagrama Entidad-Relacion](./src\main\resources\static\images\DER.jpg)
 
 
+![Vista_modulos](https://user-images.githubusercontent.com/52261739/143509340-34745fa5-e024-4590-b4d5-881edd1b63e6.jpg)
