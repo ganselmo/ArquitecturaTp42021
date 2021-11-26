@@ -40,12 +40,12 @@ Por último, se implementaron los controladores con la anotación <span style='f
 
 
 ### Diagrama vista de Modulos
-![Diagrama vista de Modulos](src\main\resources\static\images\Vista_modulos.jpg)
+![Diagrama vista de Modulos](./src\main\resources\static\images\Vista_modulos.jpg)
 
 ### Diagrama Vista Componentes y Conectores
-![Diagrama Vista Componentes y Conectores](src\main\resources\static\images\Vista_C&C.jpeg)
+![Diagrama Vista Componentes y Conectores](./src\main\resources\static\images\Vista_C&C.jpeg)
 
 ### Diagrama Entidad-Relacion
-![Diagrama Entidad-Relacion](src\main\resources\static\images\DER.jpg)
+![Diagrama Entidad-Relacion](./src\main\resources\static\images\DER.jpg)
 
 
