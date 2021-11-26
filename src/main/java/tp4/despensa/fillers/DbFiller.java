@@ -19,7 +19,7 @@ import tp4.despensa.repositories.VentaRepository;
 @Configuration
 public class DbFiller {
 	private static Logger LOG = LoggerFactory.getLogger(DbFiller.class);
-	@Bean
+//	@Bean
 	public CommandLineRunner initDb(ClienteRepository cr,ProductoRepository pr,VentaRepository vr) {
 		return args-> {
 			IntStream.range(0, 10).forEach(i->{

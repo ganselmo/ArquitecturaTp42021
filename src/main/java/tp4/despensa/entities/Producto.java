@@ -95,10 +95,6 @@ public class Producto {
 		return cantidad;
 	}
 
-	public void setCantidad(int cantidad) {
-		this.cantidad =  cantidad;
-	}
-	
 	
 	public double getPrecio() {
 		return precio;
@@ -117,11 +113,16 @@ public class Producto {
 		this.cantidad -=cant ;
 	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+
 
 	@Override
 	public String toString() {
-		return "Producto [nombre=" + nombre + ", descripcion=" + descripcion + ", cantidad=" + cantidad + ", precio="
-				+ precio + "]";
+		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", cantidad=" + cantidad
+				+ ", precio=" + precio + "]";
 	}
 
 	@Override
@@ -139,6 +140,10 @@ public class Producto {
 			return false;
 		Producto other = (Producto) obj;
 		return id == other.id;
+	}
+
+	public void setCantidad(int cant) {
+		this.cantidad = cant;
 	}
 	
 	

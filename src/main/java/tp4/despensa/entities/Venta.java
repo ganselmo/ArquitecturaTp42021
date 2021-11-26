@@ -45,7 +45,9 @@ public class Venta {
 		super();
 	}
 
-
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Venta(Cliente cliente, List<Producto> productos) {
 		super();
@@ -116,10 +118,9 @@ public class Venta {
 
 	@Override
 	public String toString() {
-		return "Venta [cliente=" + cliente + ", productos=" + productos + ", fecha=" + fecha + ", total=" + total + "]";
+		return "Venta [id=" + id + ", cliente=" + cliente + ", productos=" + productos + ", fecha=" + fecha + ", total="
+				+ total + "]";
 	}
-
-
 
 	@Override
 	public int hashCode() {
