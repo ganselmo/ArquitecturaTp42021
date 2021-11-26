@@ -1,18 +1,16 @@
 import { apiURL, getTabla } from "../script.js";
 
-const resource = "/clientes";
+const resource = "/productos";
 
 let container = document.querySelector("#tabla");
-
-const drawTablaCliente = async ()=>
+const drawTablaProducto = async ()=>
 {
     await getTabla(container,apiURL + resource);
 
     const botonesModificar = document.querySelectorAll(".btn-modificar")
     botonesModificar.forEach(btn => {
         btn.addEventListener("click", function (e) {
-            console.log("gero")
-            editarCliente(e.target.getAttributeNode("data-id").value)
+            editarProducto(e.target.getAttributeNode("data-id").value)
     
         })
     })
@@ -21,21 +19,16 @@ const drawTablaCliente = async ()=>
     botonesEliminar.forEach(btn => {
         btn.addEventListener("click", function (e) {
             
-            borrarCliente(e.target.getAttributeNode("data-id").value)
+            borrarProducto(e.target.getAttributeNode("data-id").value)
     
         })
     })
     
 }
+document.addEventListener("DOMContentLoaded", drawTablaProducto);
 
 
-// btnEliminar.addEventListener("click", function (e) {
-//     console.log(e)
-//     // borrarCliente(element.id)
-
-// })
-
-const borrarCliente = id => {
+const borrarProducto = id => {
 
     fetch(apiURL + resource + "/" + id, {
         method: "DELETE",
@@ -45,16 +38,12 @@ const borrarCliente = id => {
             if (r.ok) {
 
                 toastOK.show()
-                drawTablaCliente()
+                drawTablaProducto()
             }
             else {
                 toastNotOK.show()
             }
             return r.json()
-        })
-        .then(json => {
-
-
         })
         .catch(Exc => {
 
@@ -66,14 +55,13 @@ const borrarCliente = id => {
 const toastOKLive = document.getElementById('eliminado')
 const toastOKNotLive = document.getElementById('noEliminado')
 const toastOK = new bootstrap.Toast(toastOKLive)
-
 const toastNotOK = new bootstrap.Toast(toastOKNotLive)
-document.addEventListener("DOMContentLoaded", drawTablaCliente);
+
 
 
 
 let toEdit = {};
-const editarCliente = id => {
+const editarProducto = id => {
 
     fetch(apiURL + resource + "/" + id, {
         method: "GET",
@@ -98,15 +86,19 @@ const modalToggle = new bootstrap.Modal(document.getElementById('editModal'), {
 
 const formNombre = document.querySelector("input[name='nombre']");
 
-const formApellido = document.querySelector("input[name='apellido']");
+const formDescripcion = document.querySelector("textarea[name='descripcion']");
 
-const formDni = document.querySelector("input[name='dni']");
+const formCantidad = document.querySelector("input[name='cantidad']");
+
+const formPrecio = document.querySelector("input[name='precio']");
 
 const openEditModal = () => {
-    console.log(toEdit)
+    console.log(formDescripcion)
+    
     formNombre.value = toEdit.nombre;
-    formApellido.value = toEdit.apellido;
-    formDni.value = toEdit.dni;
+    formDescripcion.value = toEdit.descripcion;
+    formCantidad.value = toEdit.cantidad;
+    formPrecio.value = toEdit.precio;
 
     modalToggle.toggle()
 }
@@ -117,10 +109,11 @@ const toastOkGuardado = new bootstrap.Toast(toastGuardado)
 
 const updateCliente = () => {
 
-    toEdit.nombre = formNombre.value;
-    toEdit.apellido = formApellido.value;
-    toEdit.dni = formDni.value;
-
+    toEdit.nombre=formNombre.value;
+    toEdit.descripcion=formDescripcion.value;
+    toEdit.cantidad = parseInt(formCantidad.value);
+    toEdit.precio= formPrecio.value ;
+    console.log(toEdit)
     fetch(apiURL + resource + "/" + toEdit.id, {
         "method": "PUT",
         "mode": "cors",
@@ -136,10 +129,12 @@ const updateCliente = () => {
         .then(json => {
             toastOkGuardado.show()
 
-            drawTablaCliente()
+            drawTablaProducto()
         })
         .catch(Exc => console.log(Exc));
 }
+
 const guardarbtn = document.querySelector("#guardar")
 guardarbtn.addEventListener("click", updateCliente);
+
 

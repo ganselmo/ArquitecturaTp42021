@@ -1,12 +1,131 @@
-// document.addEventListener("DOMContentLoaded", iniciarindex);
 
 export const apiURL = "http://tudai-arqui-tp5.herokuapp.com/api/v1";
 // export const apiURL = "http://localhost:8080/api/v1";
 
-export const capitalize = function (str) {
+export const capitalize =  (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+const getHeader = async () =>
+{
+    const header = document.querySelector("#header")
+
+    if(header)
+    {
+        let res = await fetch("/header.html");
+        let headerHtml = await res.text()
+        
+        header.innerHTML = headerHtml
+    }
+    
+
+}
+
+getHeader()
+export const getTabla = async (container,url) => {
+
+    
+    container.innerHTML = "<h1>Loading...</h1>";
+    let data;
+    try {
+        let response = await fetch(url, {
+            method: "GET",
+            mode: 'cors',
+        });
+        if (response.ok) {
+            data = await response.json();
+            container.innerHTML = ""
+            constructTable(container, data)
+
+          
+            console.log(data);
+            return data;
+        }
+        else
+            container.innerHTML = "<h1>Error - Failed URL!</h1>";
+    }
+    catch (error) {
+        console.log(error);
+        container.innerHTML = "<h1>Connection error</h1>";
+    };
+
+}
+
+
+
+ const constructTable = (container, data) => {
+
+
+    const trhead = document.createElement('tr');
+
+    const headers = Object.keys(data[0]).map(element => capitalize(element));
+
+    headers.push("Acción")
+
+    headers.forEach(element => {
+        const th = document.createElement('th');
+        th.innerHTML = element
+        trhead.appendChild(th);
+        if (element === "Acción") {
+            th.setAttribute("style", "width:230px;")
+        }
+    })
+
+    const thead = document.createElement("thead")
+    thead.appendChild(trhead)
+    thead.setAttribute("align", "center")
+    container.appendChild(thead)
+
+    const tbody = document.createElement("tbody")
+    data.forEach(element => {
+
+        const tr = document.createElement('tr');
+        Object.values(element).forEach(element => {
+            const td = document.createElement('td');
+            td.innerHTML = element;
+            tr.appendChild(td)
+        });
+
+        const tdAccion = document.createElement("td")
+        tdAccion
+        // tdAccion.setAttribute("class","d-flex justify-content-around")
+        tdAccion.setAttribute("style", "width:230px;")
+
+        const btnModificar = document.createElement("button");
+        btnModificar.setAttribute("type", "button");
+        btnModificar.setAttribute("class", "btn btn-warning me-4 btn-modificar");
+        btnModificar.setAttribute("data-id", element.id);
+
+        btnModificar.innerHTML = "Modificar";
+
+
+
+        
+        tdAccion.appendChild(btnModificar)
+
+        const btnEliminar = document.createElement("button");
+        btnEliminar.setAttribute("type", "button");
+        btnEliminar.setAttribute("data-id", element.id);
+        btnEliminar.setAttribute("class", "btn btn-danger btn-eliminar");
+
+        btnEliminar.innerHTML = "Eliminar";
+
+        tdAccion.appendChild(btnEliminar)
+
+      
+
+
+
+        tr.appendChild(tdAccion)
+        tbody.appendChild(tr)
+
+    });
+
+    tbody.setAttribute("align", "center")
+    container.appendChild(tbody)
+
+
+}
 // function iniciarindex() {
 
 //     //env variables 
